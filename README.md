@@ -1,2 +1,2 @@
 # learHbase
-简单实用hbase添加表功能demo
+简单使用hbase添加表功能demo
