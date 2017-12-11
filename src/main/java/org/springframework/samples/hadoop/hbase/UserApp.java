@@ -42,6 +42,15 @@ public class UserApp {
 		List<User> users = userRepository.findAll();
 		System.out.println("Number of users = " + users.size());
 		System.out.println(users);
-	
+		// test find onw
+		User s = userRepository.findOne() ;
+		System.out.println(s );
+
+		// test find some users
+		users = userRepository.findSome();
+		System.out.println(users);
+		// test find onw
+
+
 	}
 }

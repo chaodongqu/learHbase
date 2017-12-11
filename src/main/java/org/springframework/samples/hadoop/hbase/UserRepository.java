@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.hadoop.hbase.HbaseTemplate;
@@ -37,6 +38,40 @@ public class UserRepository {
 		});
 
 	}
+
+	// 获取row为 user2的数据
+	public  User findOne(){
+		return
+				hbaseTemplate.get(tableName ,"user2" , new RowMapper<User>() {
+			@Override
+			public User mapRow(Result result, int rowNum) throws Exception {
+				return new User(Bytes.toString(result.getValue(CF_INFO, qUser)),
+						Bytes.toString(result.getValue(CF_INFO, qEmail)),
+						Bytes.toString(result.getValue(CF_INFO, qPassword)));
+			}
+		});
+		// return null ;
+	}
+
+	// 获取 user1 -3 ,scan 方法测试
+	public  List<User>  findSome()
+	{
+
+		byte[] startRow = Bytes.toBytes("user1");
+		byte[] endRow = Bytes.toBytes("user4");
+		Scan s = new Scan( startRow,endRow);
+
+		return hbaseTemplate.find(tableName,s, new RowMapper<User>() {
+			@Override
+			public User mapRow(Result result, int rowNum) throws Exception {
+				return new User(Bytes.toString(result.getValue(CF_INFO, qUser)),
+						Bytes.toString(result.getValue(CF_INFO, qEmail)),
+						Bytes.toString(result.getValue(CF_INFO, qPassword)));
+			}
+		});
+
+	}
+
 
 	public User save(final String userName, final String email,
 			final String password) {
