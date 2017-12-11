@@ -1,0 +1,2 @@
+Main-Class: org.springframework.samples.hadoop.hbase.UserApp
+
