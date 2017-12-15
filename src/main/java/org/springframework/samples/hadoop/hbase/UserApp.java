@@ -19,12 +19,15 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+@SpringBootApplication
 public class UserApp {
 
 	private static final Log log = LogFactory.getLog(UserApp.class);
+
 
 	public static void main(String[] args) throws Exception {
 		// System.setProperty("hadoop.home.dir", "D:\\study\\stu\\hadoop");
